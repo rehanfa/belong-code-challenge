@@ -23,6 +23,7 @@ Description
 - docker-compose build (to build all docker images)
 - docker-compose up (to run all services)
 - docker-compose down (to stop all services)
+
 ---------------------
 
 1.Discovery
@@ -55,6 +56,7 @@ Description
 - ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=telecom/discovery-service
 - docker-compose up (to run all services)
 - docker-compose down (to stop all services)
+
 ---------------------
 
 2.Security
@@ -98,10 +100,11 @@ Endpoint Detail
 - Packaging: mvn package, compiled jar in *target/* folder
 
 - Run using jar: java -jar security-0.0.1-SNAPSHOT.jar from *target/* folder
+
  -----------
- 
- 
- 3.Customer Detail
+
+
+3.Customer Detail
 ---------------------
 
 Description
@@ -174,6 +177,7 @@ Endpoint Detail
 - ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=telecom/customer-detail-service
 - docker-compose up (to run all services)
 - docker-compose down (to stop all services)
+
 ---------------------
 
 
