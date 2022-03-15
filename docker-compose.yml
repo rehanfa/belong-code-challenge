@@ -1,0 +1,49 @@
+version: '3'
+services:
+  discovery:
+    build: ./discovery
+    image: telecom/discovery-service
+    ports:
+      - "8761:8761"
+    container_name: discovery-service-container
+
+  security:
+    build: ./security
+    image: telecom/security-service
+    container_name: security-service-container
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service-container:8761/eureka/
+
+    depends_on:
+      - discovery
+    links:
+      - discovery
+
+  customer-detail:
+    build: ./customer-detail
+    image: telecom/customer-detail-service
+    container_name: customer-detail-service-container
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service-container:8761/eureka/
+
+    depends_on:
+      - discovery
+      - security
+    links:
+      - discovery
+
+  proxy:
+    build: ./proxy
+    image: telecom/proxy-service
+    ports:
+      - "8081:8081"
+    container_name: proxy-service-container
+    environment:
+      - eureka.client.serviceUrl.defaultZone=http://discovery-service-container:8761/eureka/
+
+    depends_on:
+      - discovery
+      - security
+      - customer-detail
+    links:
+      - discovery
